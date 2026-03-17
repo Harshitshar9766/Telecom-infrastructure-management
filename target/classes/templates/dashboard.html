@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Dashboard - Tower Health</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Tower Dashboard</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="/towers">Towers</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/errors/report">Report Error</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/technicians">Technicians</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/assignments">Maintenance</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col">
+                <div class="card text-white bg-primary">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Towers</h5>
+                        <p class="card-text" th:text="${totalTowers}"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card text-white bg-success">
+                    <div class="card-body">
+                        <h5 class="card-title">Active Towers</h5>
+                        <p class="card-text" th:text="${activeTowers}"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card text-white bg-danger">
+                    <div class="card-body">
+                        <h5 class="card-title">Towers With Errors</h5>
+                        <p class="card-text" th:text="${towersWithErrors}"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card text-white bg-warning">
+                    <div class="card-body">
+                        <h5 class="card-title">Under Maintenance</h5>
+                        <p class="card-text" th:text="${towersUnderMaintenance}"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card text-white bg-secondary">
+                    <div class="card-body">
+                        <h5 class="card-title">Fixed Towers</h5>
+                        <p class="card-text" th:text="${towersFixed}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3>Open Errors</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Error ID</th>
+                    <th>Tower ID</th>
+                    <th>Type</th>
+                    <th>Priority</th>
+                    <th>Description</th>
+                    <th>Reported</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="err : ${openErrors}">
+                    <td th:text="${err.errorId}"></td>
+                    <td th:text="${err.towerId}"></td>
+                    <td th:text="${err.errorType}"></td>
+                    <td th:text="${err.priority}"></td>
+                    <td th:text="${err.description}"></td>
+                    <td th:text="${err.reportedTime}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
